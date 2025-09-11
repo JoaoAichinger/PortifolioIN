@@ -4,16 +4,15 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import SearchWindow from './components/SearchWindow'
 import MyHeader from './components/MyHeader'
+import Introduction from './components/Introduction'
 
 function App() {
   //const [count, setCount] = useState(0)
 
   return (
     <>
-      <header>
-        <MyHeader></MyHeader>
-      </header>
-      
+      <MyHeader></MyHeader>
+      <Introduction className="intro"></Introduction>
       <SearchWindow></SearchWindow>
       
     </>

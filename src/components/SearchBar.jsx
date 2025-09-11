@@ -25,4 +25,4 @@ function SearchBar({ searchTerm, setSearchTerm }) {
   );
 }
 
-export default SearchBar;
+export default SearchBar; 

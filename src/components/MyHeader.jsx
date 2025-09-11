@@ -1,10 +1,19 @@
 import "./MyHeader.css"
+import logo from "../assets/logo.png"
 
 function MyHeader(){
     return(
-        <div>
-            <img src="https://webapp377823.ip-23-239-29-170.cloudezapp.io/wp-content/uploads/2018/02/logo-visual-header.png" alt="IN logo" />
-        </div>
+        <header>
+            <div className="center">
+                <a href="https://infinityschool.com.br/"><img src={logo} alt="IN logo" /></a>
+            </div>
+            <nav className="right">
+                <a href="">LOGIN</a>
+
+            </nav>
+        </header>
+        
+        
 
     );
 }

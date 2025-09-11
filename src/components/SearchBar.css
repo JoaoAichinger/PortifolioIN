@@ -6,6 +6,7 @@ input{
     min-width: 90%;
     padding-left: 10px;
     color: black;
+    flex: 1;
 }
 
 .container{
@@ -13,4 +14,6 @@ input{
     flex-direction: row;
     gap: 10px;
     min-width: 80vw;
+
+    margin: 0 100px;
 }
