@@ -13,7 +13,7 @@ function App() {
     <>
       <MyHeader></MyHeader>
       <Introduction className="intro"></Introduction>
-      <SearchWindow></SearchWindow>
+      <SearchWindow className="searchContainer"></SearchWindow>
       
     </>
   );
