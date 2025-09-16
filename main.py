@@ -17,9 +17,15 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="/auth/login-form")
 
 from routes.auth_routes import auth_router
+from routes.project_routes import project_routes
+from routes.students_routes import students_routes
+from routes.tags_routes import tags_routes
 
 
 app.include_router(auth_router)
+app.include_router(project_routes)
+app.include_router(students_routes)
+app.include_router(tags_routes)
 
 from schemas.auth_schemas import MessageOut
 
