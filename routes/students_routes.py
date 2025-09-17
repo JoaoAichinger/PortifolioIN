@@ -1,40 +1,40 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import delete
-from models.auth_models import Aluno
+from models.auth_models import Student
 from dependencies import get_session
-from schemas.auth_schemas import AlunoSchemas
+from schemas.auth_schemas import StudentSchemas
 from sqlalchemy.orm import Session
 
 
-students_routes =  APIRouter(prefix="/alunos", tags=["Alunos"])
+students_routes =  APIRouter(prefix="/students", tags=["Students"])
 
-@students_routes.post("/cadastrar")
-async def cadastrar_aluno(aluno_schema: AlunoSchemas, session = Depends(get_session)):
-    aluno = session.query(Aluno).filter(Aluno.nome==aluno_schema.nome).first()
-    if aluno:
-        raise HTTPException(status_code=400, detail="Aluno já cadastrado.")
+@students_routes.post("/register")
+async def register_student(student_schemas: StudentSchemas, session = Depends(get_session)):
+    student = session.query(Student).filter(Student.name==student_schemas.name).first()
+    if student:
+        raise HTTPException(status_code=400, detail="Student já cadastrado.")
     else:
-        novo_aluno = Aluno(aluno_schema.nome, aluno_schema.celular, aluno_schema.curso)
-        session.add(novo_aluno)
+        new_student = Student(student_schemas.name, student_schemas.cell, student_schemas.course)
+        session.add(new_student)
         session.commit()
-        return{"message": f"aluno {aluno_schema.nome} cadastrado com sucesso."}
+        return{"message": f"student {student_schemas.name} successfully registered!"}
     
-@students_routes.get("/listar")
-def listar_alunos(session = Depends(get_session)):
-    todos_alunos = session.query(Aluno).all()
-    if not todos_alunos:
-        raise HTTPException(status_code=404, detail="Não há alunos cadastrados.")
+@students_routes.get("/list")
+def list_students(session = Depends(get_session)):
+    all_students = session.query(Student).all()
+    if not all_students:
+        raise HTTPException(status_code=404, detail="There are no registered students.")
     else:
-        return [{"id": aluno.id, "nome": aluno.nome} for aluno in todos_alunos]
+        return [{"name": student.name, "course": student.course, "phone": student.cell} for student in all_students]
     
-@students_routes.put("/editar/{aluno_id}")
-def editar_alunos(aluno_id: int, aluno_schema: AlunoSchemas, session=Depends(get_session)):
-    aluno = Aluno.session.query(Aluno).fliter(Aluno.id == aluno_id).first()
-    if not aluno:
-        raise HTTPException(status_code=404, detail="Não encontramos este aluno no sistema.")
+@students_routes.put("/edit/{student_id}")
+def edit_students(student_id: int, student_schemas: StudentSchemas, session=Depends(get_session)):
+    student = session.query(Student).filter(Student.id == student_id).first()
+    if not student:
+        raise HTTPException(status_code=404, detail="We did not find this student in the system.")
     else:
-        aluno.nome = aluno_schema.nome
-        aluno.curso = aluno_schema.curso
-        aluno.celular = aluno_schema.celular
+        student.name = student_schemas.name
+        student.course = student_schemas.course
+        student.cell = student_schemas.cell
         session.commit()
-        return{"message": f"Aluno {aluno.nome} atualizado com sucesso!"}
+        return{"message": f"Student {student.name} updated successfully!"}

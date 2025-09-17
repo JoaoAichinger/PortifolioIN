@@ -1,59 +1,59 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import delete
 from typing import List
-from models.auth_models import Tags, Projetos
+from models.auth_models import Tags, Project
 from dependencies import get_session
-from schemas.auth_schemas import ProjetosSchemas, TagsSchemas
+from schemas.auth_schemas import ProjectSchemas, TagSchemas
 from sqlalchemy.orm import joinedload  #joinedload carrega todas as tags de cada projeto
 
-tags_routes = APIRouter(prefix="/tags", tags=["Tags"])
+tags_routes = APIRouter(prefix="/tag", tags=["Tags"])
 
-@tags_routes.post("/cadastrar")
-async def criar_tag(tags_schema: TagsSchemas, session = Depends(get_session)):
-    tag = session.query(Tags).filter(Tags.nome==tags_schema.nome).first()
+@tags_routes.post("/register")
+async def register_tag(tag_schema: TagSchemas, session = Depends(get_session)):
+    tag = session.query(Tags).filter(Tags.name==tag_schema.name).first()
     if tag:
-        raise(HTTPException(status_code=400, detail="Tag já cadastrada."))
+        raise(HTTPException(status_code=400, detail="Tag already registered."))
     else:
-        nova_tag = Tags(tags_schema.nome)
-        session.add(nova_tag)
+        new_tag = Tags(tag_schema.name)
+        session.add(new_tag)
         session.commit()
-        return{"message": f"tag cadastrada com sucesso - {tags_schema.nome}"}
+        return{"message": f"tag successfully registered - {tag_schema.name}"}
     
 
-@tags_routes.get("/listar")
-def mostrar_tags(session = Depends(get_session)):
-    todas_tags = session.query(Tags).all()
-    if not todas_tags:
-       raise HTTPException(status_code=404, detail="Não há tags cadastradas.")
+@tags_routes.get("/list")
+def list_tags(session = Depends(get_session)):
+    all_tags = session.query(Tags).all()
+    if not all_tags:
+       raise HTTPException(status_code=404, detail="There are no registered tags.")
     else: 
-        return [{"id": tag.id, "nome": tag.nome} for tag in todas_tags]
+        return [{"id": tag.id, "name": tag.name} for tag in all_tags]
 
-@tags_routes.get("/tags/listar_projetos", response_model=List[ProjetosSchemas])
-def buscar_projetos_por_tag(tags_id:List[int]=Query(...), session= Depends(get_session)):
-    projetos = (session.query(Projetos).options(joinedload(Projetos.tags)).join(Projetos.tags).filter(Tags.id.in_(tags_id)).all())
-    if not projetos:
-        raise HTTPException(status_code=404, detail="Nenhum projeto encontrado com essas tags")
-    return projetos
+@tags_routes.get("/tags/search_projects", response_model=List[ProjectSchemas])
+def search_projects_by_tag(tags_id:List[int]=Query(...), session= Depends(get_session)):
+    project = (session.query(Project).options(joinedload(Project.tags)).join(Project.tags).filter(Tags.id.in_(tags_id)).all())
+    if not project:
+        raise HTTPException(status_code=404, detail="No projects found with these tags")
+    return project
         
-@tags_routes.put("/editar/{tag_id}")
-def editar_tag(tag_id: int, tags_schema: TagsSchemas, session = Depends(get_session)):
+@tags_routes.put("/edit/{tag_id}")
+def edit_tag(tag_id: int, tag_schema: TagSchemas, session = Depends(get_session)):
     tag = session.query(Tags).filter(Tags.id == tag_id).first()
     if not tag:
-        raise HTTPException(status_code=404, detail="Tag não encontrada.")
+        raise HTTPException(status_code=404, detail="Tag not found.")
     else:
-        tag.nome = tags_schema.nome
+        tag.name = tag_schema.name
         session.commit()
-        return {"message": f"Tag {tag_id} atualizada com sucesso", "tag": {"id": tag.id, "nome": tag.nome}}
+        return {"message": f"Tag with id {tag_id} updated successfully"}
     
-@tags_routes.delete("/excluir/{tags_id}")
-def excluir_tag(tag_id: int, session = Depends(get_session)):
+@tags_routes.delete("/delete/{tags_id}")
+def delete_tag(tag_id: int, session = Depends(get_session)):
     tag = session.query(Tags).filter(Tags.id == tag_id).first()
     if not tag:
-        raise HTTPException(status_code=404, detail="Tag não encontrada.")
+        raise HTTPException(status_code=404, detail="Tag not found.")
     else:
         session.delete(tag)
         session.commit()
-        return {"message": f"Tag {tag_id} deletada com sucesso!"}
+        return {"message": f"Tag with id {tag_id} deleted successfully!"}
     
 
 
