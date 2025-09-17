@@ -33,26 +33,26 @@ class LoginSchema(BaseModel):
         from_attributes = True
 
 
-class AlunoSchemas(BaseModel):
-    nome: str
-    curso: str
-    celular: str
+class StudentSchemas(BaseModel):
+    name: str
+    course: str
+    cell: str
 
     class Config:
         from_attributes = True
 
-class TagsSchemas(BaseModel):
-    nome: str
+class TagSchemas(BaseModel):
+    name: str
 
     class Config:
         from_attributes = True
 
-class ProjetosSchemasCadastrar(BaseModel):
-    aluno_id: int
-    titulo: str
-    foto: str
-    descricao: str
-    corpo: str
+class ProjectSchemasCadastrar(BaseModel):
+    student_id: int
+    title: str
+    photo: str
+    description: str
+    body: str
     tags: list[int] = []
     
     class Config:
@@ -60,14 +60,14 @@ class ProjetosSchemasCadastrar(BaseModel):
         "from_attributes": True  
     }
         
-# Schema usado para listar projetos - (saída)
-class ProjetosSchemas(BaseModel):
-    aluno_id: int
-    titulo: str
-    foto: str
-    descricao: str
-    corpo: str
-    tags: List[TagsSchemas] = []
+# Schema used to list projects - (output)
+class ProjectSchemas(BaseModel):
+    student_id: int
+    title: str
+    photo: str
+    description: str
+    body: str
+    tags: List[TagSchemas] = []
 
     class Config:
         from_attributes = True
