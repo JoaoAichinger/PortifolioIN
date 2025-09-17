@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, BOOLEAN, Table, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 
-
 db = create_engine('sqlite:///database.db')
 
 Base = declarative_base()
@@ -21,53 +20,54 @@ class User(Base):
         self.password = password
         self.type = type
 
-class Aluno(Base):
-    __tablename__ = "aluno"
+class Student(Base):
+    __tablename__ = "student"
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    nome = Column("nome", String)
-    curso = Column("curso", String)
-    celular = Column("celular", String)
+    name = Column("name", String, nullable=False)
+    course = Column("course", String, nullable=False)
+    cell = Column("cell", String, nullable=False)
 
-    def __init__(self, nome, celular, curso):
-        self.nome = nome
-        self.curso = curso
-        self.celular = celular
+    def __init__(self, name, course, cell):
+        self.name = name
+        self.course = course
+        self.cell = cell
 
 # tabela associativa - serve para fazer o meio de campo entre Projetos e Tags.
-projeto_Tags = Table(  
-    "projeto_tags",
+project_tags = Table(  
+    "project_tags",
     Base.metadata,
-    Column("projeto_id", Integer, ForeignKey("projetos.id")),
+    Column("project_id", Integer, ForeignKey("project.id")),
     Column("tag_id", Integer, ForeignKey("tags.id"))
 )
 
-class Projetos(Base):
-    __tablename__ = "projetos"
+class Project(Base):
+    __tablename__ = "project"
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    aluno_id = Column("aluno_id", Integer, ForeignKey("aluno.id"))
-    titulo = Column("titulo", String)
-    foto = Column("foto", String)
-    descricao = Column("descricao", String)
-    corpo = Column("corpo", String)
+    student_id = Column("student_id", Integer, ForeignKey("student.id"))
+    title = Column("title", String, nullable=False)
+    photo = Column("photo", String)
+    description = Column("description", String)
+    body = Column("corpo", String)
 
-    def __init__(self, aluno_id ,titulo, foto, descricao, corpo):
-        self.aluno_id = aluno_id
-        self.titulo = titulo
-        self.foto = foto
-        self.descricao = descricao
-        self.corpo = corpo
 
-    tags = relationship("Tags", secondary=projeto_Tags, back_populates="projetos")
+    def __init__(self, student_id, title, photo, description, body):
+        self.student_id = student_id
+        self.title = title
+        self.photo = photo
+        self.description = description
+        self.body = body
+
+    tags = relationship("Tags", secondary=project_tags, back_populates="project")
 
 class Tags(Base):
     __tablename__ = "tags"
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    nome = Column("nome", String)
+    name = Column("name", String, nullable=False)
 
-    def __init__(self, nome):
-        self.nome = nome   
+    def __init__(self, name):
+        self.name = name   
 
-    projetos = relationship("Projetos", secondary=projeto_Tags, back_populates="tags")
+    project = relationship("Project", secondary=project_tags, back_populates="tags")

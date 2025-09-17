@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
 from dotenv import load_dotenv
@@ -10,8 +11,16 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
-app = FastAPI(title= "Infinity API")
+app = FastAPI(title="Infinity API")
 
+# Configurar CORS para permitir requisições do frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Em produção, especificar os domínios permitidos
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="/auth/login-form")
@@ -20,7 +29,6 @@ from routes.auth_routes import auth_router
 from routes.project_routes import project_routes
 from routes.students_routes import students_routes
 from routes.tags_routes import tags_routes
-
 
 app.include_router(auth_router)
 app.include_router(project_routes)
@@ -32,3 +40,8 @@ from schemas.auth_schemas import MessageOut
 @app.get("/", response_model=MessageOut)
 def root():
     return MessageOut(message="Welcome to Infinity API. Go to /docs to see the documentation.")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+

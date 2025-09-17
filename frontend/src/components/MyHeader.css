@@ -67,3 +67,43 @@ header .right a:hover {
     font-size: 0.9em;
   }
 }
+
+/* Estilos para os botões de autenticação */
+header .right .auth-btn,
+header .right .logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.25s;
+}
+
+header .right .auth-btn:hover {
+  color: #c64132;
+  background: rgba(198, 65, 50, 0.1);
+}
+
+header .right .logout-btn {
+  background: #c64132;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+}
+
+header .right .logout-btn:hover {
+  background: #a53529;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  header .right .auth-btn,
+  header .right .logout-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
