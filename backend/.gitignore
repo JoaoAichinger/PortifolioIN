@@ -1,0 +1,9 @@
+# Python-generated files
+__pycache__
+
+
+# Virtual environments
+.venv
+
+#sqlite database files
+.db
