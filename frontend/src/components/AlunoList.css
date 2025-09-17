@@ -1,0 +1,44 @@
+.aluno-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* espaçamento entre cards */
+  justify-content: center;
+}
+
+.aluno-card {
+  /*flex: 0 0 calc((100% - 40px) / 3); /* 3 cards por linha, considerando 2 gaps de 20px */
+  width: 25vw;
+  background-color: #c64132;
+  color: #ffff;
+  padding: 5px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+}
+
+.aluno-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* avatar circular */
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.aluno-name {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.aluno-role {
+  font-size: 14px;
+  color: #000;
+}
+
+/* Responsivo: 1 card por linha em telas pequenas */
+@media (max-width: 768px) {
+  .aluno-card {
+    flex: 0 0 100%;
+  }
+}
