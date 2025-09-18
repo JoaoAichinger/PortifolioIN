@@ -3,7 +3,7 @@ from schemas.auth_schemas import MessageOut, SignUpSchema, UserPublic, LoginSche
 from models.auth_models import User, Student, Recruiter
 from dependencies import get_session, verify_token
 from sqlalchemy.orm import Session
-from main import bcrypt_context, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from security import bcrypt_context, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 from fastapi.security import OAuth2PasswordRequestForm

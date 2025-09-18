@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from models.auth_models import User
 from fastapi import Depends, HTTPException
 from jose import JWTError, jwt
-from main import SECRET_KEY, ALGORITHM, oauth2_schema
+from security import SECRET_KEY, ALGORITHM, oauth2_schema
 
 def get_session():
     try:
