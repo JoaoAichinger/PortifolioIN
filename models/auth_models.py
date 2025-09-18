@@ -20,18 +20,35 @@ class User(Base):
         self.password = password
         self.type = type
 
+    recruiter = relationship("Recruiter", back_populates="user")
+    student = relationship("Student", back_populates="user")
+
+class Recruiter(Base):
+    __tablename__ = "recruiters"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    company = Column(String, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True)
+
+    user = relationship("User", back_populates="recruiter")        
+
 class Student(Base):
     __tablename__ = "student"
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True)
     name = Column("name", String, nullable=False)
     course = Column("course", String, nullable=False)
     cell = Column("cell", String, nullable=False)
 
-    def __init__(self, name, course, cell):
+    def __init__(self, user_id, name, course, cell):
+        self.user_id = user_id
         self.name = name
         self.course = course
         self.cell = cell
+
+    user = relationship("User", back_populates="student")
+    projects = relationship("Project", back_populates="student")        
 
 # tabela associativa - serve para fazer o meio de campo entre Projetos e Tags.
 project_tags = Table(  
@@ -60,6 +77,7 @@ class Project(Base):
         self.body = body
 
     tags = relationship("Tags", secondary=project_tags, back_populates="project")
+    student = relationship("Student", back_populates="projects")
 
 class Tags(Base):
     __tablename__ = "tags"

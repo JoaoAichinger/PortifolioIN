@@ -10,6 +10,9 @@ class SignUpSchema(BaseModel):
     email: EmailStr
     password: str
     type: bool  # True for student, False for recruiter
+    cell: Optional[str] = None
+    course: Optional[str] = None
+    company: Optional[str] = None
 
     class Config:
         from_attributes = True    
@@ -48,7 +51,6 @@ class TagSchemas(BaseModel):
         from_attributes = True
 
 class ProjectSchemasCadastrar(BaseModel):
-    student_id: int
     title: str
     photo: str
     description: str
@@ -62,12 +64,12 @@ class ProjectSchemasCadastrar(BaseModel):
         
 # Schema used to list projects - (output)
 class ProjectSchemas(BaseModel):
-    student_id: int
+    #student_id: int
     title: str
     photo: str
     description: str
     body: str
-    tags: List[TagSchemas] = []
+    tags: List[int]
 
     class Config:
         from_attributes = True

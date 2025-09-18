@@ -1,6 +1,6 @@
 from fastapi import FastAPI, status, HTTPException, APIRouter, Depends
 from schemas.auth_schemas import MessageOut, SignUpSchema, UserPublic, LoginSchema
-from models.auth_models import User
+from models.auth_models import User, Student, Recruiter
 from dependencies import get_session, verify_token
 from sqlalchemy.orm import Session
 from main import bcrypt_context, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
@@ -21,32 +21,54 @@ def create_token(user_id: str, duration: timedelta = timedelta(minutes=ACCESS_TO
 def authenticate_user(email: str, password: str, session: Session):
     user = session.query(User).filter(User.email == email).first()
     if not user:
-        return False
+        return None
     if not bcrypt_context.verify(password, user.password):
-        return False
+        return None
 
     return user
-
-
-#Cadastra um novo usuario
+    
 @auth_router.post("/sign-up", response_model=MessageOut)
 def create_user(user_in: SignUpSchema, session: Session = Depends(get_session)):
-    ''' Cadastra um novo usuário '''
+    '''Cadastra um novo usuário'''
     user = session.query(User).filter(User.email == user_in.email).first()
     if user:
         raise HTTPException(status_code=400, detail="Email already registered")
-    else:
-        crypted_password = bcrypt_context.hash(user_in.password)
-        new_user = User(name=user_in.name, email=user_in.email, password=crypted_password, type=user_in.type)
-        session.add(new_user)
-        session.commit()
-        return MessageOut(message="User created successfully")
+    crypted_password = bcrypt_context.hash(user_in.password)
+
+    new_user = User(
+        name = user_in.name,
+        email = user_in.email,
+        password = crypted_password,
+        type = user_in.type  # True = estudante, False = recrutador
+    )
+    session.add(new_user)
+    session.commit()
+    session.refresh(new_user)
+
+    if user_in.type: 
+        student = Student(
+            user_id = new_user.id,
+            name = new_user.name,
+            course = user_in.course, 
+            cell = user_in.cell
+        )
+        session.add(student)
+    else:  
+        recruiter = Recruiter(
+            user_id = new_user.id,
+            company = user_in.company  
+        )
+        session.add(recruiter)
+
+    session.commit()
+    return MessageOut(message="User created successfully")
+
 
 @auth_router.post("/login")
 def login(user_in: LoginSchema, session: Session = Depends(get_session)):
     user = authenticate_user(user_in.email, user_in.password, session)
     if not user:
-        raise HTTPException(status_code=400, detail="Email not registered")
+        raise HTTPException(status_code=400, detail="Email not registered or incorrect password")
     else:
         access_token = create_token(user.id)
         refresh_token = create_token(user.id, duration=timedelta(days=7))

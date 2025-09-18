@@ -30,10 +30,23 @@ def list_tags(session = Depends(get_session)):
 
 @tags_routes.get("/tags/search_projects", response_model=List[ProjectSchemas])
 def search_projects_by_tag(tags_id:List[int]=Query(...), session= Depends(get_session)):
-    project = (session.query(Project).options(joinedload(Project.tags)).join(Project.tags).filter(Tags.id.in_(tags_id)).all())
-    if not project:
+    projects = (session.query(Project).options(joinedload(Project.tags)).join(Project.tags).filter(Tags.id.in_(tags_id)).all())
+    if not projects:
         raise HTTPException(status_code=404, detail="No projects found with these tags")
-    return project
+    result = []
+    for project in projects:
+        proj_dict = {
+            "id": project.id,
+            "student_id": project.student_id,
+            "title": project.title,
+            "photo": project.photo,
+            "description": project.description,
+            "body": project.body,
+            "tags": [tag.id for tag in project.tags] 
+        }
+        result.append(proj_dict)
+    
+    return result
         
 @tags_routes.put("/edit/{tag_id}")
 def edit_tag(tag_id: int, tag_schema: TagSchemas, session = Depends(get_session)):

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import delete
-from models.auth_models import Student
-from dependencies import get_session
+from models.auth_models import Student, User
+from dependencies import get_session, verify_token
 from schemas.auth_schemas import StudentSchemas
 from sqlalchemy.orm import Session
 
@@ -27,9 +27,21 @@ def list_students(session = Depends(get_session)):
     else:
         return [{"name": student.name, "course": student.course, "phone": student.cell} for student in all_students]
     
-@students_routes.put("/edit/{student_id}")
-def edit_students(student_id: int, student_schemas: StudentSchemas, session=Depends(get_session)):
+@students_routes.put("/edit_id")
+def edit_students_id(student_id: int, student_schemas: StudentSchemas, session=Depends(get_session)):
     student = session.query(Student).filter(Student.id == student_id).first()
+    if not student:
+        raise HTTPException(status_code=404, detail="We did not find this student in the system.")
+    else:
+        student.name = student_schemas.name
+        student.course = student_schemas.course
+        student.cell = student_schemas.cell
+        session.commit()
+        return{"message": f"Student {student.name} updated successfully!"}
+
+@students_routes.put("/edit")
+def edit_student(student_id: int, student_schemas: StudentSchemas, session=Depends(get_session), user: User = Depends(verify_token)):
+    student = session.query(Student).filter(Student.id == student_id, Student.student.has(user_id=user.id)).first()
     if not student:
         raise HTTPException(status_code=404, detail="We did not find this student in the system.")
     else:
