@@ -4,7 +4,7 @@ import MyHeader from './MyHeader'
 import Introduction from './Introduction'
 import MyFooter from './MyFooter'
 import AlunoList from './AlunoList'
-import Carousel from './Carousel'
+import "./Home.css"
 
 function Home() {
   const [selectedTags, setSelectedTags] = useState([]);
