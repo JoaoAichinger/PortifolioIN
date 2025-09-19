@@ -58,6 +58,7 @@ function SearchBar({ searchTerm = "", selectedTags = [], onSearchChange, onTagRe
             placeholder="Digite sua busca..."
             value={inputValue}
             onChange={handleInputChange}
+            className="input-search"
           />
           <Button name="Buscar" onClick={handleSearch} />
         </div>
