@@ -198,68 +198,69 @@ session.commit()
 projects_data = [
     {
         "title": "Sistema de Gestão Escolar",
-        "photo": "https://via.placeholder.com/400x300/4CAF50/white?text=Sistema+Escolar",
+        "photo": "https://www.totvs.com/educacao/",
         "description": "Sistema completo para gestão de escolas com controle de alunos, professores e notas.",
         "body": "Um sistema web desenvolvido em Python com Django para gerenciar todas as atividades de uma escola. Inclui módulos para cadastro de alunos, professores, disciplinas, notas e relatórios. Interface responsiva e intuitiva com dashboard administrativo completo.",
         "tags": ["Python", "Django", "PostgreSQL", "HTML", "CSS", "JavaScript", "Bootstrap"]
     },
     {
         "title": "E-commerce Moderno",
-        "photo": "https://via.placeholder.com/400x300/2196F3/white?text=E-commerce",
+        "photo": "https://www.americanas.com.br/",
         "description": "Plataforma de e-commerce com carrinho de compras, pagamento online e painel administrativo.",
         "body": "E-commerce desenvolvido com React no frontend e Node.js no backend. Integração com APIs de pagamento, sistema de autenticação JWT, carrinho de compras persistente e painel administrativo completo. Implementa microservices e containerização com Docker.",
         "tags": ["React", "Node.js", "Express", "MongoDB", "JavaScript", "HTML", "CSS", "Docker", "Microservices"]
     },
     {
         "title": "App de Delivery Mobile",
-        "photo": "https://via.placeholder.com/400x300/FF9800/white?text=Delivery+App",
+        "photo": "https://www.ifood.com.br/",
         "description": "Aplicativo mobile para delivery de comida com geolocalização e pagamento integrado.",
         "body": "Aplicativo desenvolvido em React Native com funcionalidades de geolocalização, integração com APIs de pagamento, sistema de avaliações e chat em tempo real entre cliente e entregador. Utiliza Firebase para notificações push.",
         "tags": ["React Native", "Mobile", "JavaScript", "Node.js", "MongoDB", "Firebase", "Android", "iOS"]
     },
     {
         "title": "Dashboard Analytics com IA",
-        "photo": "https://via.placeholder.com/400x300/9C27B0/white?text=Analytics+Dashboard",
+        "photo": "https://www.tableau.com/",
         "description": "Dashboard interativo para análise de dados com gráficos e relatórios em tempo real usando IA.",
         "body": "Dashboard desenvolvido com Vue.js e D3.js para visualização de dados. Conecta-se a múltiplas fontes de dados, gera relatórios automáticos com Machine Learning e permite análises preditivas com filtros avançados.",
         "tags": ["Vue.js", "JavaScript", "Data Science", "Python", "PostgreSQL", "HTML", "CSS", "AI", "Machine Learning"]
     },
     {
         "title": "Sistema de Blog com CMS",
-        "photo": "https://via.placeholder.com/400x300/607D8B/white?text=Blog+System",
+        "photo": "https://wordpress.com/",
         "description": "Plataforma de blog com editor de texto rico e sistema de comentários avançado.",
         "body": "Sistema de blog desenvolvido com Flask e PostgreSQL. Inclui editor WYSIWYG, sistema de comentários com moderação, categorias, tags, busca avançada, SEO otimizado e painel administrativo para gerenciamento de conteúdo.",
         "tags": ["Python", "Flask", "PostgreSQL", "HTML", "CSS", "JavaScript", "SEO", "CMS"]
     },
     {
         "title": "Portfolio Interativo 3D",
-        "photo": "https://via.placeholder.com/400x300/795548/white?text=Portfolio",
+        "photo": "https://tympanus.net/Development/CreativePortfolio/",
         "description": "Site portfolio responsivo com animações 3D e design moderno.",
         "body": "Portfolio pessoal desenvolvido com HTML5, CSS3, JavaScript e Three.js. Design responsivo, animações 3D interativas, integração com APIs do GitHub, formulário de contato funcional e otimização para performance.",
         "tags": ["HTML", "CSS", "JavaScript", "Design", "UI/UX", "Figma", "Three.js", "WebGL"]
     },
     {
         "title": "API RESTful Microservices",
-        "photo": "https://via.placeholder.com/400x300/3F51B5/white?text=REST+API",
+        "photo": "https://swagger.io/",
         "description": "API RESTful escalável com arquitetura de microservices e autenticação JWT.",
         "body": "API desenvolvida em Node.js com Express, implementando padrões REST e arquitetura de microservices. Inclui autenticação JWT, validação de dados, documentação Swagger, testes automatizados com Jest e deploy com Kubernetes.",
         "tags": ["Node.js", "Express", "JavaScript", "MongoDB", "JWT", "Docker", "Kubernetes", "Microservices", "Testing"]
     },
     {
         "title": "Jogo Web 2D Multiplayer",
-        "photo": "https://via.placeholder.com/400x300/E91E63/white?text=Web+Game",
+        "photo": "https://www.miniclip.com/games/en/",
         "description": "Jogo 2D multiplayer desenvolvido em JavaScript com Canvas API e WebSockets.",
         "body": "Jogo de plataforma 2D multiplayer desenvolvido com JavaScript puro, Canvas API e Socket.io. Implementa sistema de física avançado, detecção de colisões, sistema de pontuação global, salas de jogo e chat em tempo real.",
         "tags": ["JavaScript", "HTML", "CSS", "Canvas", "WebSockets", "Socket.io", "Game Development", "Multiplayer"]
     },
     {
         "title": "Chatbot IA com NLP",
-        "photo": "https://via.placeholder.com/400x300/009688/white?text=AI+Chatbot",
+        "photo": "https://chat.openai.com/",
         "description": "Chatbot inteligente com processamento de linguagem natural e aprendizado de máquina.",
         "body": "Chatbot desenvolvido em Python com processamento de linguagem natural usando NLTK e spaCy. Integração com APIs externas, sistema de aprendizado contínuo, análise de sentimentos e interface web responsiva com React.",
         "tags": ["Python", "AI", "Machine Learning", "NLTK", "Flask", "JavaScript", "React", "NLP", "Data Science"]
     }
 ]
+
 
 # Criar múltiplos projetos para cada estudante para ter mais variedade
 print("Criando projetos...")
