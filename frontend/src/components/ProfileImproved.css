@@ -59,7 +59,7 @@
   bottom: 0;
   right: 0;
   background: #17a2b8;
-  color: white;
+  color: black;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -161,6 +161,7 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background: white;
+  color: black;
 }
 
 .edit-input:focus,

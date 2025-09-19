@@ -11,3 +11,49 @@
     width: 35vw;
 }
 
+/* ===== Mobile First ===== */
+.search-window {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem;
+}
+
+.title {
+    color: white;
+    font-size: 1.8rem; /* ~28px em telas pequenas */
+    width: 100%;
+    line-height: 1.3;
+}
+
+/* ===== Tablets ===== */
+@media (min-width: 600px) {
+    .search-window {
+        margin-top: 3rem;
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+
+    .title {
+        font-size: 2.5rem; /* ~40px */
+        width: 80%;
+    }
+}
+
+/* ===== Laptops / Desktop ===== */
+@media (min-width: 1024px) {
+    .search-window {
+        margin-top: 4rem;
+        gap: 2.5rem;
+        padding: 0 4rem;
+    }
+
+    .title {
+        font-size: 3rem; /* ~48px */
+        width: 35vw; /* mantém proporção original */
+    }
+}
+
+
+
