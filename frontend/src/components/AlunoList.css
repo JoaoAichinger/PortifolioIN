@@ -1,0 +1,173 @@
+.aluno-list {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.aluno-list.loading,
+.aluno-list.error,
+.aluno-list.empty {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.aluno-list.error {
+  color: #dc3545;
+}
+
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.student-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.student-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: #007bff;
+}
+
+.student-avatar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.student-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f0f0;
+}
+
+.student-info {
+  text-align: center;
+}
+
+.student-name {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.student-role {
+  margin: 0 0 1rem 0;
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.latest-project {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.project-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #007bff;
+}
+
+.project-description {
+  margin: 0 0 1rem 0;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tag {
+  background: #f8f9fa;
+  color: #495057;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.project-tag.more {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.students-count {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.students-section {
+  margin: 2rem 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .aluno-list {
+    padding: 1rem;
+  }
+  
+  .students-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .student-card {
+    padding: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .student-avatar img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .student-name {
+    font-size: 1.1rem;
+  }
+  
+  .project-title {
+    font-size: 0.9rem;
+  }
+  
+  .project-description {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,10 @@
+# Ignorar node_modules do frontend
+/frontend/node_modules/
+
+# Ignorar venv do backend
+/backend/venv/
+
+# Arquivos comuns que também vale ignorar
+*.pyc
+__pycache__/
+.env

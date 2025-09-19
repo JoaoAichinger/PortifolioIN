@@ -1,0 +1,134 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 50%;                    /* referência para centralização */
+  transform: translateX(-50%);  /* centraliza horizontalmente */
+  width: 80vw;                  /* largura do header */
+  height: 80px;
+  background-color: #000000;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Divs internas */
+
+
+header .center {
+  position: absolute;       /* logo central absoluto */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+header .center img {
+  height: 60px;
+}
+
+/* Botões / nav à direita */
+header .right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-right: 100px;
+}
+
+header .right a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: border 0.25s;
+}
+
+header .right a:hover {
+  color: #c64132;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  header {
+    width: 95vw;
+    height: 100px;
+    padding: 0 10px;
+  }
+
+  header .center img {
+    height: 50px;
+  }
+
+  header .right a {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+  }
+}
+
+/* Estilos para os botões de autenticação */
+header .right .auth-btn,
+header .right .logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.25s;
+}
+
+header .right .auth-btn:hover {
+  color: #c64132;
+  background: rgba(198, 65, 50, 0.1);
+}
+
+header .right .logout-btn {
+  background: #c64132;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+}
+
+header .right .logout-btn:hover {
+  background: #a53529;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  header .right .auth-btn,
+  header .right .logout-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Estilo para o botão da logo */
+header .center .logo-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+header .center .logo-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+header .center .logo-btn img {
+  height: 60px;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  header .center .logo-btn img {
+    height: 50px;
+  }
+}

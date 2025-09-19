@@ -1,0 +1,70 @@
+/* Footer geral */
+.footer {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.9;
+  padding: 40px 20px;
+  margin-top: 30px;
+}
+
+/* Container de colunas */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Cada coluna */
+.footer-column {
+  flex: 1 1 200px; /* mínimo 200px, cresce se houver espaço */
+  margin: 10px;
+}
+
+/* Imagem do logo */
+.footer-column img {
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Título das seções */
+.footer-column h6 {
+  margin-bottom: 10px;
+}
+
+/* Lista de links */
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+/* Links */
+.footer-column a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer-column a:hover {
+  
+  color: rgb(48, 48, 172);
+}
+
+/* Responsivo simples: colapsa para 1 coluna em telas pequenas */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  .footer-column {
+    margin: 10px 0;
+  }
+}
+
+.botCopy{
+    background-color: #191919;
+}

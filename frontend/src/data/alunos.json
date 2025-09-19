@@ -1,0 +1,22 @@
+[
+  { "id": 1, "name": "João Silva", "avatar": "https://i.pravatar.cc/150?img=1", "role": "Full Stack Developer" },
+  { "id": 2, "name": "Maria Santos", "avatar": "https://i.pravatar.cc/150?img=2", "role": "UI/UX Designer" },
+  { "id": 3, "name": "Carlos Oliveira", "avatar": "https://i.pravatar.cc/150?img=3", "role": "Data Scientist" },
+  { "id": 4, "name": "Ana Costa", "avatar": "https://i.pravatar.cc/150?img=4", "role": "Marketing Specialist" },
+  { "id": 5, "name": "Pedro Almeida", "avatar": "https://i.pravatar.cc/150?img=5", "role": "Project Manager" },
+  { "id": 6, "name": "Beatriz Lima", "avatar": "https://i.pravatar.cc/150?img=6", "role": "Frontend Developer" },
+  { "id": 7, "name": "Lucas Pereira", "avatar": "https://i.pravatar.cc/150?img=7", "role": "Backend Developer" },
+  { "id": 8, "name": "Juliana Rocha", "avatar": "https://i.pravatar.cc/150?img=8", "role": "Product Designer" },
+  { "id": 9, "name": "Rafael Martins", "avatar": "https://i.pravatar.cc/150?img=9", "role": "DevOps Engineer" },
+  { "id": 10, "name": "Carla Fernandes", "avatar": "https://i.pravatar.cc/150?img=10", "role": "Content Creator" },
+  { "id": 11, "name": "Thiago Souza", "avatar": "https://i.pravatar.cc/150?img=11", "role": "Mobile Developer" },
+  { "id": 12, "name": "Fernanda Gomes", "avatar": "https://i.pravatar.cc/150?img=12", "role": "QA Engineer" },
+  { "id": 13, "name": "Vitor Ribeiro", "avatar": "https://i.pravatar.cc/150?img=13", "role": "Data Analyst" },
+  { "id": 14, "name": "Patrícia Castro", "avatar": "https://i.pravatar.cc/150?img=14", "role": "Graphic Designer" },
+  { "id": 15, "name": "Eduardo Carvalho", "avatar": "https://i.pravatar.cc/150?img=15", "role": "System Administrator" },
+  { "id": 16, "name": "Aline Barros", "avatar": "https://i.pravatar.cc/150?img=16", "role": "SEO Specialist" },
+  { "id": 17, "name": "Marcelo Fernandes", "avatar": "https://i.pravatar.cc/150?img=17", "role": "Business Analyst" },
+  { "id": 18, "name": "Julio Lima", "avatar": "https://i.pravatar.cc/150?img=18", "role": "Cloud Engineer" },
+  { "id": 19, "name": "Camila Dias", "avatar": "https://i.pravatar.cc/150?img=19", "role": "Social Media Manager" },
+  { "id": 20, "name": "Renato Alves", "avatar": "https://i.pravatar.cc/150?img=20", "role": "UI Developer" }
+]

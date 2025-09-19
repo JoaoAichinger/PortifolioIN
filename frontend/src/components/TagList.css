@@ -1,0 +1,23 @@
+.tagBtn{
+    transition: 1s;
+}
+
+.tagEl{
+    list-style-type: none;
+}
+
+.tagContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.tagList{
+    display: flex ;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    gap: 15px;
+    justify-content: center;
+    max-width: 70vw;
+}

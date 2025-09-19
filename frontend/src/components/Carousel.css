@@ -1,0 +1,39 @@
+.carousel {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.carousel-content {
+  overflow: hidden;
+}
+
+.carousel-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  gap: 1.5rem;
+}
+
+.carousel-btn {
+  background: transparent; /* sem background */
+  color: #c64132;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: space-between; /* seta esquerda e direita nas extremidades */
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.carousel-indicators {
+  display: none; /* esconder pontos */
+}
+
+.carousel-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
