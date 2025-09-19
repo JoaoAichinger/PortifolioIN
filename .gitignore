@@ -7,4 +7,4 @@
 # Arquivos comuns que também vale ignorar
 *.pyc
 __pycache__/
-.env
+
