@@ -8,7 +8,7 @@ Para configurar e executar o backend localmente, siga os passos abaixo:
 
 1.  **Navegue até o diretório do backend:**
     ```bash
-    cd final_project/backend
+    cd PortifolioIN/backend
     ```
 
 2.  **Crie e ative um ambiente virtual (recomendado):**
