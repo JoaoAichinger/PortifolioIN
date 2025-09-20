@@ -1,0 +1,318 @@
+/* ===== Base (Mobile First) ===== */
+:root {
+  --red: #d90429;
+  --dark: #111;
+  --dark-box: #181818;
+  --gray: #444;
+  --text-light: #fff;
+  --text-muted: #aaa;
+}
+
+/* Reset box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Layout principal */
+.main-bg {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--dark);
+  color: var(--text-light);
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* Lado esquerdo (login) */
+.login-side {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 22rem; /* tamanho fixo da caixa */
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--dark-box);
+  border: 0.15rem solid var(--red);
+  border-radius: 0.3rem;
+}
+
+/* ===== Proteção contra CSS global ===== */
+.login-box input,
+.login-box button,
+.login-box .login-password-box,
+.login-box .login-options,
+.login-box .error-message {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* Logo + título */
+.login-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.login-logo-img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  background: var(--red);
+  border-radius: 0.3rem;
+}
+.login-logo-title {
+  font-size: 1.4rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+.login-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Labels e Inputs */
+.login-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.login-input {
+  padding: 0.75rem;
+  background: #222;
+  border: 0.1rem solid var(--gray);
+  border-radius: 0.25rem;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* Senha + olho */
+.login-password-box {
+  position: relative;
+}
+
+.login-eye {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.2rem;
+  height: 1.2rem;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.login-eye:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Botão */
+.login-btn {
+  padding: 0.9rem 0;
+  margin-top: 0.5rem;
+  background: var(--red);
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.login-btn:hover {
+  background: #a80320;
+}
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Opções */
+.login-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.login-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+}
+
+.login-switch input {
+  display: none;
+}
+.login-switch-slider {
+  width: 2rem;
+  height: 1rem;
+  background: #222;
+  border-radius: 1rem;
+  display: inline-block;
+  position: relative;
+  transition: background 0.3s;
+}
+.login-switch-slider::before {
+  content: "";
+  position: absolute;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: var(--red);
+  top: 50%;
+  left: 0.05rem;
+  transform: translateY(-50%);
+  transition: transform 0.3s;
+}
+.login-switch input:checked + .login-switch-slider::before {
+  transform: translate(1rem, -50%);
+}
+
+.login-link {
+  color: var(--red);
+  text-decoration: none;
+}
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.login-divider {
+  border-top: 1px solid #333;
+  margin: 1rem 0;
+}
+
+.login-register {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  word-wrap: break-word;
+}
+
+/* Mensagem de erro */
+.error-message {
+  background: rgba(217, 4, 41, 0.15);
+  border: 1px solid var(--red);
+  border-radius: 0.25rem;
+  padding: 0.6rem;
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ===== Lado direito (destaque) ===== */
+.highlight-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  width: 100%;
+}
+
+.highlight-circles {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.highlight-circle {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  border: 0.2rem solid var(--red);
+  overflow: hidden;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.highlight-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.highlight-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.highlight-dots {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #444;
+}
+
+.dot.active {
+  background: var(--red);
+}
+
+/* ===== Media Queries ===== */
+@media (min-width: 768px) {
+  .main-bg {
+    flex-direction: row;
+  }
+  .login-side {
+    flex: 0 0 26rem;
+    min-height: 100vh;
+  }
+  .highlight-side {
+    padding: 0 2rem;
+  }
+  .highlight-circle {
+    width: 9rem;
+    height: 9rem;
+  }
+  .highlight-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .highlight-circle {
+    width: 11rem;
+    height: 11rem;
+  }
+  .highlight-title {
+    font-size: 2rem;
+  }
+  .highlight-desc {
+    font-size: 1.1rem;
+  }
+}

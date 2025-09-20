@@ -1,18 +1,27 @@
-:root {
+/* ===== Reset básico seguro ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== HTML e body ===== */
+html {
+  font-size: 16px; /* base para rem */
+}
+
+body {
+  width: 100%;
+  min-width: 20rem; /* equivalente a 320px */
+  min-height: 100vh;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: rgba(255, 255, 255, 0.87);
 }
 
+/* ===== Links ===== */
 a {
   font-weight: 500;
   color: #646cff;
@@ -22,23 +31,12 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* ===== Botões ===== */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  border-radius: 0.5rem; /* arredondamento relativo */
+  border: 0.0625rem solid transparent; /* 1px em rem */
+  padding: 0.375rem 0.75rem; /* padding relativo */
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -50,9 +48,41 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 0.25rem auto -webkit-focus-ring-color; /* 4px em rem */
 }
 
+/* ===== Inputs, textareas e selects globais ===== */
+input, textarea, select {
+  width: 100%;           /* respeita o container */
+  max-width: 100%;       /* não ultrapassa o container */
+  min-width: 0;          /* sobrescreve min-width de resets/bibliotecas */
+  font-family: inherit;
+  font-size: 1rem;
+  color: inherit;
+  background: #222;
+  border: 0.0625rem solid #444; /* 1px em rem */
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+  outline: none;
+  resize: none; /* evita redimensionamento manual de textarea */
+}
+
+/* ===== Containers principais ===== */
+.container {
+  width: 100%;
+  max-width: 75rem; /* ~1200px em rem */
+  margin: 0 auto;   /* centraliza */
+  padding: 0 1rem;  /* padding relativo */
+}
+
+/* ===== Cabeçalhos ===== */
+h1 {
+  font-size: 2rem; /* escalável */
+  line-height: 1.1;
+}
+
+/* ===== Suporte para modo claro ===== */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -63,5 +93,18 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* ===== Media Queries para responsividade ===== */
+@media (min-width: 48rem) { /* 768px */
+  body {
+    font-size: 1.0625rem; /* 17px */
+  }
+}
+
+@media (min-width: 64rem) { /* 1024px */
+  body {
+    font-size: 1.125rem; /* 18px */
   }
 }

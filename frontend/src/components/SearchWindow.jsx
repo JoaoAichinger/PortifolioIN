@@ -3,33 +3,59 @@ import SearchBar from './SearchBar';
 import TagList from './TagList';
 import './SearchWindow.css';
 
-function SearchWindow(props) {
-  const [tags, setTags] = useState([]);
+function SearchWindow({ onSearchChange, onTagsChange }) {
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  function handleAddTag(tag){
-    if (!tags.includes(tag)){
-      setTags([...tags, tag]);
+  function handleTagToggle(tagId) {
+    let newSelectedTags;
+    if (selectedTags.includes(tagId)) {
+      // Remover tag se já estiver selecionada
+      newSelectedTags = selectedTags.filter(id => id !== tagId);
+    } else {
+      // Adicionar tag se não estiver selecionada
+      newSelectedTags = [...selectedTags, tagId];
+    }
+    
+    setSelectedTags(newSelectedTags);
+    
+    // Notificar o componente pai sobre a mudança
+    if (onTagsChange) {
+      onTagsChange(newSelectedTags);
     }
   }
 
-  function handleRemoveag(tag){
-    setTags(tags.filter(t => t !== tag));
+  function handleSearchChange(term) {
+    setSearchTerm(term);
+    
+    // Notificar o componente pai sobre a mudança
+    if (onSearchChange) {
+      onSearchChange(term);
+    }
   }
-  
 
   return (
-    <div className={props.className}>
-      <h1 className='title'>O que sua mente está procurando? 
-Nós te ajudamos a encontrar:</h1>
+    <div className="search-window">
+      <h1 className='title'>
+        O que sua mente está procurando? 
+        <br />
+        Nós te ajudamos a encontrar:
+      </h1>
+      
       <SearchBar 
-        tags={tags} 
-        setTags={setTags} 
+        searchTerm={searchTerm}
+        selectedTags={selectedTags}
+        onSearchChange={handleSearchChange}
+        onTagRemove={handleTagToggle}
       />
+      
       <TagList 
-        addTag={handleAddTag}  
+        selectedTags={selectedTags}
+        onTagToggle={handleTagToggle}
       />
     </div>
   );
 }
 
 export default SearchWindow;
+

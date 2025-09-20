@@ -1,63 +1,93 @@
-# Infinity API - Backend
+# Backend do Portfólio
 
-## Descrição
-API desenvolvida em FastAPI para gerenciar usuários, estudantes, projetos e tags.
+Este diretório contém o código-fonte do backend do projeto de portfólio, desenvolvido com FastAPI e SQLAlchemy.
 
-## Estrutura
-- **Backend:** FastAPI + SQLAlchemy + SQLite
-- **Frontend:** React (Vite) - integração planejada
+## Configuração e Execução
 
-## Instalação
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate   # Windows: .\.venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+Para configurar e executar o backend localmente, siga os passos abaixo:
+
+1.  **Navegue até o diretório do backend:**
+    ```bash
+    cd final_project/backend
+    ```
+
+2.  **Crie e ative um ambiente virtual (recomendado):**
+    ```bash
+    python3.11 -m venv venv
+    source venv/bin/activate
+    ```
+
+3.  **Instale as dependências:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Configure as variáveis de ambiente:**
+    Crie um arquivo `.env` na raiz do diretório `backend` com o seguinte conteúdo:
+    ```
+    SECRET_KEY="sua_chave_secreta_aqui" # Use uma string longa e aleatória
+    ALGORITHM="HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES=30
+    ```
+
+5.  **Popule o banco de dados (opcional, mas recomendado para testes):**
+    Execute o script `populate_db_improved.py` para criar usuários de teste, estudantes, projetos e tags.
+    ```bash
+    python populate_db_improved.py
+    ```
+    Este script também exibirá as credenciais dos usuários de teste.
+
+6.  **Inicie o servidor da API:**
+    ```bash
+    uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    ```
+
+O servidor da API estará disponível em `http://localhost:8000`. A documentação interativa (Swagger UI) estará em `http://localhost:8000/docs`.
+
+## Estrutura do Projeto
+
+O projeto segue uma estrutura modular para o backend:
+
+```
+backend/
+├── alembic.ini             # Configuração do Alembic (migrações de banco de dados)
+├── database.db             # Banco de dados SQLite (gerado)
+├── dependencies.py         # Funções de dependência para FastAPI (e.g., sessão DB, verificação de token)
+├── main.py                 # Ponto de entrada da aplicação FastAPI
+├── migrations/             # Migrações de banco de dados (geradas pelo Alembic)
+├── models/                 # Definições dos modelos SQLAlchemy (User, Student, Project, Tags)
+├── populate_db.py          # Script original para popular o DB
+├── populate_db_improved.py # Script melhorado para popular o DB com usuários de teste
+├── pyproject.toml
+├── requirements.txt        # Dependências do Python
+├── routes/                 # Definições das rotas da API
+│   ├── auth_routes.py      # Rotas de autenticação (login, sign-up)
+│   ├── project_routes.py   # Rotas relacionadas a projetos
+│   ├── students_routes.py  # Rotas relacionadas a estudantes
+│   ├── tags_routes.py      # Rotas relacionadas a tags
+│   └── profile_routes.py   # **NOVO:** Rotas para perfil do usuário
+├── schemas/                # Schemas Pydantic para validação de dados
+├── uv.lock
+└── venv/                   # Ambiente virtual (se criado)
 ```
 
-## Endpoints Principais
-- **Auth**
-  - POST /auth/sign-up
-  - POST /auth/login
-  - GET /auth/refresh
-  - GET /auth/users
+## Novas Funcionalidades e Alterações
 
-- **Students**
-  - POST /students/register
-  - GET /students/list
-  - PUT /students/edit/{student_id}
+### 1. Autenticação e Perfil do Usuário
 
-- **Projects**
-  - POST /project/register
-  - GET /project/list
-  - PUT /project/edit/{project_id}
-  - DELETE /project/delete/{project_id}
+-   **`populate_db_improved.py`:** Um novo script foi criado para popular o banco de dados com usuários de teste (estudantes e recrutadores) e senhas conhecidas (`123456`). Isso facilita os testes de login e o desenvolvimento.
+-   **`routes/profile_routes.py`:** Nova rota adicionada para gerenciar o perfil do usuário logado (`/users/me`).
+    -   `GET /users/me`: Retorna os dados do usuário logado.
+    -   `PUT /users/me`: Permite atualizar o nome do usuário logado (pode ser expandido para outros campos).
+-   **Integração com `main.py`:** A nova rota de perfil foi incluída no arquivo principal da aplicação.
 
-- **Tags**
-  - POST /tag/register
-  - GET /tag/list
-  - GET /tag/tags/search_projects?tags_id=1&tags_id=2
-  - PUT /tag/edit/{tag_id}
-  - DELETE /tag/delete/{tag_id}
+### 2. Lógica de Filtragem de Estudantes
 
-## Banco de Dados
-- users (id, name, email, password, type)
-- student (id, name, course, cell)
-- project (id, student_id, title, photo, description, corpo)
-- tags (id, name)
-- project_tags (project_id, tag_id)
-
-## Problemas Conhecidos
-- Inconsistência: coluna `corpo` vs `body`
-- Decorator/param desincronizado em rotas
-- Trechos de código inacabados com `...`
-- Fluxo de refresh token simplificado demais
-
-## Integração Frontend
-- Criar serviços em `src/services/api.js` com `fetch`
-- Criar `AuthContext` em `src/contexts/AuthContext.jsx`
-- Implementar `LoginForm.jsx`
+-   **`routes/students_routes.py`:** A lógica da rota `GET /students/list` foi modificada para atender ao requisito de 100% de compatibilidade na busca por tags.
+    -   Agora, ao filtrar por múltiplas tags, apenas os estudantes que possuem **pelo menos um projeto que contenha TODAS as tags selecionadas** serão retornados.
 
 ## Testes
-Abrir `http://localhost:8000/docs` para testar via Swagger UI.
+
+Após iniciar o backend, utilize as credenciais fornecidas pelo `populate_db_improved.py` para testar as funcionalidades de login, acesso ao perfil e a filtragem de estudantes por tags. Acesse `http://localhost:8000/docs` para interagir com a API via Swagger UI.
+
+---

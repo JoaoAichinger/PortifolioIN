@@ -1,52 +1,73 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
+:root {
     --fonte: "Raleway", sans-serif;
 }
 
-h1{
-    color: #c64132;
-    position:relative;
-    margin: 0;
-    margin-left: 231px;
-    font-size: 70px;
-    font-family: var(--fonte);
-    font-weight: 700;
-    
-}
-
-h2{
-    margin: 0;
-    margin-left: 231px;
-    font-size: 70px;
-    max-width: 35vw;
-    font-family: var(--fonte);
-    font-weight: 700;
-}
-
-h3{
-    margin:0;
-    margin-left: 231px;
-    font-family: var(--fonte);
-    max-width: 33vw;
-    font-size: 45px;
-    font-weight: 300;
-}
-
-.intro{
+/* ===== Estilos Mobile First ===== */
+.intro {
     background-image: url("../assets/backgroundimg1.png");
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
 
-    position: relative;
     width: 100%;
-    height: 70vh;
-
+    height: clamp(50vh, 70vw, 70vh); /* altura fluida conforme a tela */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 0;
-    top: 0;
+    padding-left: 5%; /* margem inicial fluida */
+    padding-right: 5%;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #c64132;
+    margin: 0;
+    font-family: var(--fonte);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 4rem); /* mínimo 2.5rem, escala com a tela */
+}
+
+h2 {
+    margin: 0.5em 0 0 0; /* espaçamento vertical relativo */
+    font-family: var(--fonte);
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    max-width: 90vw;
+}
+
+h3 {
+    margin: 0.5em 0 0 0;
+    font-family: var(--fonte);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    max-width: 85vw;
+}
+
+/* ===== Telas médias (tablet) ===== */
+@media (min-width: 768px) {
+    .intro {
+        padding-left: 7%;
+        padding-right: 7%;
+        height: 65vh;
+    }
+
+    h2 { max-width: 70vw; }
+    h3 { max-width: 60vw; }
+}
+
+/* ===== Telas grandes (desktop) ===== */
+@media (min-width: 1200px) {
+    .intro {
+        padding-left: 10%;
+        padding-right: 10%;
+        height: 70vh;
+    }
+
+    h1 { font-size: 4rem; }
+    h2 { font-size: 3.5rem; }
+    h3 { font-size: 2.5rem; }
+    h2 { max-width: 60vw; }
+    h3 { max-width: 50vw; }
 }
