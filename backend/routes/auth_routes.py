@@ -1,12 +1,19 @@
-from fastapi import FastAPI, status, HTTPException, APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from schemas.auth_schemas import MessageOut, SignUpSchema, UserPublic, LoginSchema
 from models.auth_models import User
 from dependencies import get_session, verify_token
 from sqlalchemy.orm import Session
-from main import bcrypt_context, SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 from fastapi.security import OAuth2PasswordRequestForm
+import os
+
+# Importar as configurações diretamente
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
+bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 auth_router = APIRouter(prefix="/auth", tags=["Authentication"])

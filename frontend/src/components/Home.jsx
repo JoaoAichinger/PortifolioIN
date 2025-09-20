@@ -2,18 +2,44 @@ import { useState } from 'react'
 import SearchWindow from './SearchWindow'
 import MyHeader from './MyHeader'
 import Introduction from './Introduction'
+import MyFooter from './MyFooter'
+import AlunoList from './AlunoList'
+import "./Home.css"
 
 function Home() {
-  //const [count, setCount] = useState(0)
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  function handleSearchChange(term) {
+    setSearchTerm(term);
+  }
+
+  function handleTagsChange(tags) {
+    setSelectedTags(tags);
+  }
 
   return (
     <>
-      <MyHeader></MyHeader>
-      <Introduction className="intro"></Introduction>
-      <SearchWindow className="searchContainer"></SearchWindow>
+      <MyHeader />
+      <Introduction className="intro" />
+      <SearchWindow 
+        className="searchContainer"
+        onSearchChange={handleSearchChange}
+        onTagsChange={handleTagsChange}
+      />
       
+      <div className="students-section">
+        <h2 className="section-title">Estudantes e Projetos</h2>
+        <AlunoList 
+          selectedTags={selectedTags}
+          searchTerm={searchTerm}
+        />
+      </div>
+      
+      <MyFooter />
     </>
   );
 }
 
 export default Home;
+

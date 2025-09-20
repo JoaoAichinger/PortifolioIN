@@ -3,7 +3,13 @@ from sqlalchemy.orm import sessionmaker, Session
 from models.auth_models import User
 from fastapi import Depends, HTTPException
 from jose import JWTError, jwt
-from main import SECRET_KEY, ALGORITHM, oauth2_schema
+from fastapi.security import OAuth2PasswordBearer
+import os
+
+# Importar as configurações diretamente
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="/auth/login-form")
 
 def get_session():
     try:
